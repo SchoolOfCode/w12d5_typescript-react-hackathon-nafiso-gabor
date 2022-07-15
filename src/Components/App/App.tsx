@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-//import Weather from "../Weather/Weather";
+
 import "./App.css";
 
 export type dataResult = {
