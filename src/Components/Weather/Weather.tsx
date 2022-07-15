@@ -1,7 +1,12 @@
-import React from 'react'
+// import React, { useEffect, useState } from "react";
+import './App.css';
 
 export default function Weather() {
   return (
-    <div>Weather</div>
+    <div>
+<h1>Hello</h1>
+
+
+    </div>
   )
 }
