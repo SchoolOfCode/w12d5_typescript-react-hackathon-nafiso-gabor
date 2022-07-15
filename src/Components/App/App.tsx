@@ -47,7 +47,7 @@ function App() {
         <button>Search</button>
       </div>
       <div>
-        <p>City name: {data?.ame} </p>
+        <p>City name: {data?.name} </p>
         <p>Condition: {data?.description} </p>
         <p>Temperature: {data?.temperature} Celsius</p>
         <p>Country code: {data?.country}</p>
