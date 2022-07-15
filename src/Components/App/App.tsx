@@ -11,9 +11,13 @@ export type dataResult = {
   humidity: number;
 };
 function App() {
-  //const [latitude, setLatitude] = useState<Number>(0);
-  //const [longitude, setLongitude] = useState<Number>(0);
   const [data, setData] = useState<dataResult>();
+  const [locationSearch, setLocationSearch] = useState('');
+  //const [locations, setLocations] = useState<string[]>([]);
+
+
+
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -21,9 +25,8 @@ function App() {
       //   setLatitude(latitude);
       //   setLongitude(longitude);
       // });
-      let city = "birmingham";
       await fetch(
-        `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=7f1f24a7cef58e3f76ff3bb60c5617c8`
+        `https://api.openweathermap.org/data/2.5/weather?q=${locationSearch}&appid=7f1f24a7cef58e3f76ff3bb60c5617c8&units=metric`
       )
         .then((res) => res.json())
         .then((result) => {
@@ -40,16 +43,28 @@ function App() {
         });
     };
     fetchData();
-  }, []);
+  }, [locationSearch]);
+
+
+ 
+
+
 
   return (
     <div className="App">
-      <p>{data?.name} </p>
-      <p>{data?.description} </p>
-      <p>{data?.temperature}</p>
-      <p>{data?.timezone}</p>
-      <p>{data?.country}</p>
-      <p>{data?.humidity}</p>
+
+<div>
+  <label>
+    Search Location </label> <br /><input type="text" value={locationSearch} onChange={e => setLocationSearch(e.target.value)}/>
+  
+  <button>Search</button>
+</div>
+
+      <p>City name: {data?.name} </p>
+      <p>Condition: {data?.description} </p>
+      <p>Temperature: {data?.temperature} Celsius</p>
+      <p>Country code: {data?.country}</p>
+      <p>Humidity: {data?.humidity}%</p>
     </div>
   );
 }
