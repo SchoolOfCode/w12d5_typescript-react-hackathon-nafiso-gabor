@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Weather from "../Weather/Weather";
+//import Weather from "../Weather/Weather";
 import "./App.css";
 
 export type dataResult = {
@@ -12,19 +12,11 @@ export type dataResult = {
 };
 function App() {
   const [data, setData] = useState<dataResult>();
-  const [locationSearch, setLocationSearch] = useState('');
-  //const [locations, setLocations] = useState<string[]>([]);
-
-
-
-
+  const [locationSearch, setLocationSearch] = useState("");
+  // const [locations, setLocations] = useState<string[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
-      // navigator.geolocation.getCurrentPosition(function (position) {
-      //   setLatitude(latitude);
-      //   setLongitude(longitude);
-      // });
       await fetch(
         `https://api.openweathermap.org/data/2.5/weather?q=${locationSearch}&appid=7f1f24a7cef58e3f76ff3bb60c5617c8&units=metric`
       )
@@ -39,32 +31,28 @@ function App() {
             humidity: result.main.humidity,
           });
           console.log(result);
-          //console.log(data);
         });
     };
     fetchData();
   }, [locationSearch]);
 
-
- 
-
-
-
+  function onChange(e: React.ChangeEvent<HTMLInputElement>) {
+    setLocationSearch(e.target.value);
+  }
   return (
     <div className="App">
-
-<div>
-  <label>
-    Search Location </label> <br /><input type="text" value={locationSearch} onChange={e => setLocationSearch(e.target.value)}/>
-  
-  <button>Search</button>
-</div>
-
-      <p>City name: {data?.name} </p>
-      <p>Condition: {data?.description} </p>
-      <p>Temperature: {data?.temperature} Celsius</p>
-      <p>Country code: {data?.country}</p>
-      <p>Humidity: {data?.humidity}%</p>
+      <div>
+        <label>Search Location </label> <br />
+        <input type="text" value={locationSearch} onChange={onChange} />
+        <button>Search</button>
+      </div>
+      <div>
+        <p>City name: {data?.name} </p>
+        <p>Condition: {data?.description} </p>
+        <p>Temperature: {data?.temperature} Celsius</p>
+        <p>Country code: {data?.country}</p>
+        <p>Humidity: {data?.humidity}%</p>
+      </div>
     </div>
   );
 }
